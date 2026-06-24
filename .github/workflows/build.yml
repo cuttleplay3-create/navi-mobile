@@ -22,8 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Install dependencies
-        run: |
-          pip install briefcase
+        run: pip install briefcase
 
       - name: Create project
         run: briefcase create android --no-input
@@ -31,9 +30,9 @@ jobs:
       - name: Build APK
         run: briefcase build android --no-input -r
 
-        - name: Show build log
+      - name: Show build log
         if: failure()
-        run: cat logs/briefcase.*.build.log || true
+        run: cat logs/*.build.log || true
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
