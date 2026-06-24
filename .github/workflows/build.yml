@@ -7,25 +7,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    container: kivy/buildozer
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update --fix-missing
-          sudo apt-get install -y autoconf automake libtool m4 pkg-config cmake \
-            libffi-dev libssl-dev build-essential git unzip \
-            libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
-          pip install buildozer==1.5.0 cython==0.29.37
-
       - name: Build APK
-        env:
-          P4A_PYTHON3_VERSION: "3.11"
         run: |
           yes | buildozer android debug
 
