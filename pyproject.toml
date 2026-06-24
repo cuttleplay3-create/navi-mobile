@@ -15,4 +15,3 @@ requires = ["kivy==2.3.0", "groq", "requests", "psutil"]
 
 [tool.briefcase.app.navi.android]
 requires = ["kivy==2.3.0", "groq", "requests", "psutil"]
-gradle_settings = {"org.gradle.warning.mode": "none"}
