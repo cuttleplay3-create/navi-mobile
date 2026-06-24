@@ -15,23 +15,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk
           pip install briefcase
 
       - name: Create project
-        run: |
-          briefcase create android
+        run: briefcase create android --no-input
 
       - name: Build APK
-        run: |
-          briefcase build android
+        run: briefcase build android --no-input -r
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: navi-apk
-          path: android/gradle/app/build/outputs/apk/**/*.apk
+          path: "**/*.apk"
           if-no-files-found: warn
