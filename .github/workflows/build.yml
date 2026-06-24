@@ -24,6 +24,8 @@ jobs:
           pip install buildozer==1.5.0 cython==0.29.37
 
       - name: Build APK
+        env:
+          P4A_PYTHON3_VERSION: "3.11"
         run: |
           yes | buildozer android debug
 
