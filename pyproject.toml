@@ -10,7 +10,8 @@ author_email = "cuttle@navi.app"
 [tool.briefcase.app.navi]
 formal_name = "N.A.V.I"
 description = "Neural Adaptive Virtual Intelligence"
-sources = ["."]
+sources = ["navi"]
+main_module = "navi.main"
 requires = ["kivy==2.3.0", "groq", "requests", "psutil"]
 
 [tool.briefcase.app.navi.android]
