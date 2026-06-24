@@ -1,0 +1,17 @@
+[tool.briefcase]
+project_name = "NAVI"
+bundle = "org.cuttle"
+version = "1.0.0"
+url = "https://github.com/cuttleplay3-create/navi-mobile"
+license = "MIT"
+author = "Cuttle"
+author_email = "cuttle@navi.app"
+
+[tool.briefcase.app.navi]
+formal_name = "N.A.V.I"
+description = "Neural Adaptive Virtual Intelligence"
+sources = ["main"]
+requires = ["kivy==2.3.0", "groq", "requests", "psutil"]
+
+[tool.briefcase.app.navi.android]
+requires = ["kivy==2.3.0", "groq", "requests", "psutil"]
