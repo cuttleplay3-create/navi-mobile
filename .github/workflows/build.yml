@@ -15,18 +15,25 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install buildozer
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip \
             autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
-            libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          pip install buildozer
-          pip install cython==0.29.37
+            cmake libffi-dev libssl-dev
+          pip install buildozer cython==0.29.37
+
+      - name: Accept Android licenses
+        run: |
+          mkdir -p $HOME/.android
+          touch $HOME/.android/repositories.cfg
+          yes | buildozer android debug 2>&1 | head -5 || true
+          yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;33.0.0" || true
 
       - name: Build APK
         run: |
-          buildozer -v android debug 2>&1
+          yes | buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
