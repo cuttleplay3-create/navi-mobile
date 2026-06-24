@@ -18,10 +18,9 @@ android.api = 33
 android.minapi = 21
 android.ndk = 25b
 android.archs = arm64-v8a
-
 android.allow_backup = True
 
-icon.filename = Icon.png
+p4a.branch = develop
 
 [buildozer]
 log_level = 2
