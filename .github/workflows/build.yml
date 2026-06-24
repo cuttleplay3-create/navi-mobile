@@ -10,25 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Build with Kivy Action
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
         with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y autoconf automake libtool m4 pkg-config cmake \
-            libffi-dev libssl-dev build-essential git unzip openjdk-17-jdk \
-            libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
-          pip install buildozer==1.5.0 cython==0.29.37
-
-      - name: Build APK
-        run: |
-          yes | buildozer android debug
+          command: buildozer android debug
+          buildozer_version: stable
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: navi-apk
-          path: bin/*.apk
+          path: ${{ steps.buildozer.outputs.filename }}
